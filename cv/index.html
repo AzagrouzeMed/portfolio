@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mohamed Azagrouze – Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#0d0d0d;
+  --bg2:#111111;
+  --yellow:#f5c518;
+  --yellow2:#e6b800;
+  --text:#ffffff;
+  --muted:#aaaaaa;
+  --card:#1a1a1a;
+  --border:#222222;
+}
+body{background:var(--bg);color:var(--text);font-family:'Poppins',sans-serif;overflow-x:hidden}
+
+/* ── NAV ── */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 48px;
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:999;
+}
+.logo-txt{font-weight:800;font-size:1.1rem;letter-spacing:.1em;color:var(--text)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{
+  text-decoration:none;color:var(--muted);font-size:.82rem;font-weight:500;
+  transition:color .2s;position:relative;padding-bottom:3px;
+}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:var(--yellow);transition:width .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px}
+
+/* ── HERO ── */
+#home{
+  min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:80px 48px 0;
+  position:relative;overflow:hidden;
+}
+.hero-left{padding-right:40px}
+.hello{font-size:.85rem;color:var(--muted);font-weight:400;letter-spacing:.1em;margin-bottom:10px;opacity:0;animation:fadeUp .5s .1s forwards}
+.hero-left h1{
+  font-size:clamp(2.4rem,5vw,4rem);font-weight:900;line-height:1.1;
+  opacity:0;animation:fadeUp .6s .25s forwards;
+}
+.hero-left h1 span{color:var(--yellow);display:block}
+.hero-role{font-size:1rem;color:var(--muted);font-weight:400;margin-top:12px;opacity:0;animation:fadeUp .6s .4s forwards}
+.hero-btns{display:flex;gap:14px;margin-top:28px;opacity:0;animation:fadeUp .6s .55s forwards}
+.btn-yellow{
+  background:var(--yellow);color:#0d0d0d;
+  padding:11px 24px;border-radius:4px;font-size:.82rem;font-weight:700;
+  text-decoration:none;letter-spacing:.06em;transition:background .2s,transform .2s;
+}
+.btn-yellow:hover{background:var(--yellow2);transform:translateY(-2px)}
+.btn-outline{
+  background:transparent;color:var(--text);
+  border:1px solid #444;
+  padding:11px 24px;border-radius:4px;font-size:.82rem;font-weight:600;
+  text-decoration:none;letter-spacing:.06em;transition:border-color .2s,transform .2s;
+}
+.btn-outline:hover{border-color:var(--yellow);color:var(--yellow);transform:translateY(-2px)}
+
+.hero-right{
+  display:flex;justify-content:center;align-items:flex-end;
+  position:relative;height:100%;min-height:500px;
+}
+.hero-img-wrap{
+  position:relative;
+  width:360px;max-width:100%;
+}
+/* Yellow gradient glow behind photo */
+.hero-img-wrap::before{
+  content:'';
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:280px;height:280px;
+  background:radial-gradient(circle,rgba(245,197,24,.25) 0%,transparent 70%);
+  border-radius:50%;
+  z-index:0;
+}
+.hero-photo{
+  width:100%;
+  display:block;
+  position:relative;z-index:1;
+  object-fit:cover;
+  /* Placeholder avatar using CSS */
+}
+.avatar-placeholder{
+  width:100%;height:420px;
+  background:linear-gradient(160deg,#1e1e1e 0%,#2a2a2a 100%);
+  border-radius:8px 8px 0 0;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:1;
+  overflow:hidden;
+}
+.avatar-placeholder::after{
+  content:'MA';
+  font-size:7rem;font-weight:900;
+  background:linear-gradient(135deg,var(--yellow),#ff9900);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  opacity:.15;
+}
+.avatar-silhouette{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:220px;height:320px;
+  background:linear-gradient(180deg,#2d2d2d 0%,#1a1a1a 100%);
+  border-radius:110px 110px 0 0;
+  overflow:hidden;
+  display:flex;align-items:flex-end;justify-content:center;
+}
+.avatar-head{
+  width:100px;height:100px;border-radius:50%;
+  background:#3a3a3a;
+  position:absolute;top:40px;left:50%;transform:translateX(-50%);
+}
+.avatar-body{
+  width:180px;height:200px;
+  background:#2d2d2d;
+  border-radius:90px 90px 0 0;
+  position:absolute;bottom:-20px;
+}
+
+/* ── SECTION COMMON ── */
+section{padding:90px 48px}
+.sec-title{text-align:center;margin-bottom:56px}
+.sec-title h2{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800}
+.sec-title p{color:var(--muted);font-size:.88rem;margin-top:10px}
+
+/* ── ABOUT ── */
+#about{background:var(--bg2)}
+.about-inner{
+  display:grid;grid-template-columns:1fr 1.4fr;gap:60px;
+  max-width:1000px;margin:0 auto;align-items:center;
+}
+.about-photo{
+  width:100%;aspect-ratio:3/4;
+  background:linear-gradient(160deg,#1e1e1e,#252525);
+  border-radius:6px;overflow:hidden;
+  display:flex;align-items:flex-end;justify-content:center;
+  position:relative;
+}
+.about-photo .ab-initials{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:5rem;font-weight:900;
+  color:var(--yellow);opacity:.08;
+}
+.about-photo .ab-circle{
+  width:110px;height:110px;border-radius:50%;
+  background:#2d2d2d;position:absolute;top:60px;left:50%;transform:translateX(-50%);
+}
+.about-photo .ab-body{
+  width:180px;height:220px;border-radius:90px 90px 0 0;
+  background:#252525;position:absolute;bottom:-20px;
+}
+.about-info h2{font-size:1.8rem;font-weight:800;margin-bottom:6px}
+.about-info .tagline{color:var(--muted);font-size:.88rem;margin-bottom:28px}
+.info-table{width:100%;border-collapse:collapse;margin-bottom:24px}
+.info-table tr td{padding:8px 0;font-size:.85rem;border-bottom:1px solid var(--border);vertical-align:top}
+.info-table tr:last-child td{border-bottom:none}
+.info-table td:first-child{color:var(--muted);font-weight:600;width:120px;min-width:120px}
+.info-table td:last-child{color:var(--text)}
+.project-count{
+  display:inline-flex;align-items:center;gap:10px;
+  margin-bottom:24px;font-size:.88rem;color:var(--muted);
+}
+.project-count strong{font-size:1.6rem;font-weight:800;color:var(--yellow)}
+
+/* ── SERVICES ── */
+#services{background:var(--bg)}
+.services-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;
+  max-width:1080px;margin:0 auto;
+}
+.srv-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:6px;padding:28px 24px;
+  transition:border-color .3s,transform .3s;
+  position:relative;overflow:hidden;
+}
+.srv-card::before{
+  content:'';position:absolute;top:0;left:0;width:3px;height:0;
+  background:var(--yellow);transition:height .4s;
+}
+.srv-card:hover{border-color:#333;transform:translateY(-4px)}
+.srv-card:hover::before{height:100%}
+.srv-ico{font-size:1.6rem;margin-bottom:14px}
+.srv-card h3{font-size:.95rem;font-weight:700;margin-bottom:8px}
+.srv-card p{font-size:.82rem;color:var(--muted);line-height:1.65}
+
+/* ── SKILLS ── */
+#skills{background:var(--bg2)}
+.skills-wrap{max-width:900px;margin:0 auto}
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 48px}
+.skill-item{margin-bottom:18px}
+.skill-head{display:flex;justify-content:space-between;font-size:.82rem;font-weight:600;margin-bottom:8px}
+.skill-head span:last-child{color:var(--yellow)}
+.sk-track{height:4px;background:#222;border-radius:2px}
+.sk-bar{height:100%;border-radius:2px;background:var(--yellow);width:0;transition:width 1.3s cubic-bezier(.4,0,.2,1)}
+
+/* ── CONTACT ── */
+#contact{background:var(--bg)}
+.contact-inner{max-width:860px;margin:0 auto}
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;margin-top:0}
+.c-info-list{display:flex;flex-direction:column;gap:18px;margin-top:0}
+.c-row{display:flex;align-items:flex-start;gap:14px}
+.c-dot{width:36px;height:36px;border-radius:4px;background:#1a1a1a;border:1px solid #2a2a2a;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.c-row-lbl{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.c-row-val{font-size:.85rem;color:var(--text);margin-top:2px}
+.c-form{display:flex;flex-direction:column;gap:12px}
+.c-form input,.c-form textarea{
+  background:#111;border:1px solid #2a2a2a;border-radius:4px;
+  padding:11px 14px;color:var(--text);font-family:'Poppins',sans-serif;
+  font-size:.85rem;outline:none;resize:none;width:100%;
+  transition:border-color .25s;
+}
+.c-form input:focus,.c-form textarea:focus{border-color:var(--yellow)}
+.c-form textarea{height:120px}
+.c-form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn-send{
+  background:var(--yellow);color:#0d0d0d;border:none;
+  padding:12px 24px;border-radius:4px;font-family:'Poppins',sans-serif;
+  font-size:.85rem;font-weight:700;cursor:pointer;width:100%;
+  letter-spacing:.04em;transition:background .2s,transform .2s;
+}
+.btn-send:hover{background:var(--yellow2);transform:translateY(-2px)}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:24px;right:24px;z-index:9999;
+  background:var(--yellow);color:#0d0d0d;
+  padding:12px 20px;border-radius:4px;font-weight:700;font-size:.82rem;
+  transform:translateY(70px);opacity:0;
+  transition:transform .4s cubic-bezier(.17,.67,.3,1.3),opacity .4s;
+  pointer-events:none;
+}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* FOOTER */
+footer{
+  text-align:center;padding:24px;
+  border-top:1px solid var(--border);
+  color:var(--muted);font-size:.78rem;
+}
+footer span{color:var(--yellow)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  nav{padding:14px 22px}
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg);flex-direction:column;gap:0;border-bottom:1px solid var(--border)}
+  .nav-links.open{display:flex}
+  .nav-links li a{display:block;padding:13px 22px;border-top:1px solid var(--border)}
+  .hamburger{display:flex}
+  #home{grid-template-columns:1fr;padding:90px 22px 40px;text-align:center}
+  .hero-left{padding-right:0}
+  .hero-btns{justify-content:center}
+  .hero-right{min-height:300px}
+  .avatar-placeholder{height:280px}
+  section{padding:70px 22px}
+  .about-inner,.contact-grid{grid-template-columns:1fr;gap:36px}
+  .skills-grid{grid-template-columns:1fr}
+  .c-form-row{grid-template-columns:1fr}
+}
+.about-photo {
+  border: 2px solid rgba(245, 197, 24, 0.3);
+  padding: 6px;
+  background: #111;
+}
+
+.about-img {
+  border-radius: 8px;
+}
+
+/* ===== IMAGE PREMIUM ===== */
+.about-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 6px;
+
+  /* Gradient border animé */
+  background: linear-gradient(270deg, #f5c518, #ff9900, #f5c518);
+  background-size: 400% 400%;
+  animation: gradientMove 6s ease infinite;
+}
+
+/* animation gradient */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* IMAGE */
+.about-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+
+  transition: transform 0.5s ease, filter 0.5s ease;
+  filter: brightness(0.9) contrast(1.05);
+}
+
+/* HOVER ZOOM */
+.about-photo:hover .about-img {
+  transform: scale(1.08);
+  filter: brightness(1.1) contrast(1.1);
+}
+
+
+
+/* SHADOW PRO */
+.about-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(245, 197, 24, 0.25);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.about-photo:hover::after {
+  opacity: 1;
+}
+
+
+
+
+.hero-img-wrap {
+  position: relative;
+  width: 360px;
+  max-width: 100%;
+}
+
+.hero-photo {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 12px;
+  position: relative;
+  z-index: 1;
+
+  transition: transform 0.5s ease, filter 0.5s ease;
+  filter: brightness(0.95);
+}
+
+.hero-img-wrap:hover .hero-photo {
+  transform: scale(1.05);
+  filter: brightness(1.05);
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo-txt">AZAGROUZE</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="ham" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-left">
+    <div class="hello">BONJOUR !</div>
+    <h1>Je suis <span>Mohamed<br/>Azagrouze</span></h1>
+    <div class="hero-role">Ingénieur Informatique · Data Analysis &amp; IA</div>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-yellow">Me contacter</a>
+      <a href="#services" class="btn-outline">Mes services</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right">
+    <div class="hero-img-wrap">
+      <img src="images/profile.jpeg" alt="Mohamed" class="hero-photo">
+    </div>
+</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-photo reveal">
+        <img src="images/profile.jpeg" alt="Mohamed Azagrouze" class="about-img">
+    </div>
+    <div class="about-info reveal">
+      <h2>À propos de moi</h2>
+      <p class="tagline">Étudiant ingénieur passionné par le développement web et l'intelligence artificielle, basé à Marrakech.</p>
+      <table class="info-table">
+        <tr><td>Nom :</td><td>Mohamed Azagrouze</td></tr>
+        <tr><td>Formation :</td><td>EMSI – Ingénierie Informatique</td></tr>
+        <tr><td>Spécialité :</td><td>Data Analysis &amp; IA</td></tr>
+        <tr><td>Adresse :</td><td>Marrakech, Maroc</td></tr>
+        <tr><td>Email :</td><td>mazagrouze@gmail.com</td></tr>
+        <tr><td>Téléphone :</td><td>+212 6 69 78 01 46</td></tr>
+        <tr><td>Langues :</td><td>Arabe, Français, Anglais</td></tr>
+        <tr><td>Disponible :</td><td>Stage / Freelance / Alternance</td></tr>
+      </table>
+      <div class="project-count"><strong>10+</strong> Projets réalisés</div>
+      <a href="mailto:mazagrouze@gmail.com" class="btn-yellow" style="display:inline-block">Télécharger CV</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="sec-title reveal">
+    <h2>Mes Services</h2>
+    <p>Des solutions digitales complètes adaptées à vos besoins</p>
+  </div>
+  <div class="services-grid">
+    <div class="srv-card reveal"><div class="srv-ico">🌐</div><h3>Développement Fullstack</h3><p>Applications web complètes avec React.js, Node.js et Laravel, du backend à l'interface utilisateur.</p></div>
+    <div class="srv-card reveal"><div class="srv-ico">🤖</div><h3>Intelligence Artificielle</h3><p>Analyse de données, modèles prédictifs et intégration de l'IA dans vos applications métier.</p></div>
+    <div class="srv-card reveal"><div class="srv-ico">🏢</div><h3>ERP &amp; Gestion</h3><p>Logiciels de gestion personnalisés : stock, CRM, clinique, facturation et tableaux de bord.</p></div>
+    <div class="srv-card reveal"><div class="srv-ico">🎨</div><h3>UI/UX &amp; Design Web</h3><p>Interfaces modernes, intuitives et responsive pour une expérience utilisateur optimale.</p></div>
+    <div class="srv-card reveal"><div class="srv-ico">☁️</div><h3>Applications SaaS</h3><p>Architecture cloud multi-utilisateurs avec authentification sécurisée et API REST.</p></div>
+    <div class="srv-card reveal"><div class="srv-ico">🔧</div><h3>Support &amp; Maintenance IT</h3><p>Maintenance infrastructure, déploiement POS, systèmes de sécurité et support technique.</p></div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sec-title reveal">
+    <h2>Mes Compétences</h2>
+    <p>Technologies et outils maîtrisés</p>
+  </div>
+  <div class="skills-wrap">
+    <div class="skills-grid">
+      <div class="skill-item reveal"><div class="skill-head"><span>React.js</span><span>90%</span></div><div class="sk-track"><div class="sk-bar" data-w="90"></div></div></div>
+      <div class="skill-item reveal"><div class="skill-head"><span>Laravel / PHP</span><span>85%</span></div><div class="sk-track"><div class="sk-bar" data-w="85"></div></div></div>
+      <div class="skill-item reveal"><div class="skill-head"><span>Node.js / Express</span><span>88%</span></div><div class="sk-track"><div class="sk-bar" data-w="88"></div></div></div>
+      <div class="skill-item reveal"><div class="skill-head"><span>Python / IA</span><span>75%</span></div><div class="sk-track"><div class="sk-bar" data-w="75"></div></div></div>
+      <div class="skill-item reveal"><div class="skill-head"><span>MySQL / SQL</span><span>88%</span></div><div class="sk-track"><div class="sk-bar" data-w="88"></div></div></div>
+      <div class="skill-item reveal"><div class="skill-head"><span>Java</span><span>70%</span></div><div class="sk-track"><div class="sk-bar" data-w="70"></div></div></div>
+      <div class="skill-item reveal"><div class="skill-head"><span>HTML / CSS / JS</span><span>92%</span></div><div class="sk-track"><div class="sk-bar" data-w="92"></div></div></div>
+      <div class="skill-item reveal"><div class="skill-head"><span>Git / GitHub</span><span>82%</span></div><div class="sk-track"><div class="sk-bar" data-w="82"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="sec-title reveal">
+      <h2>Contact</h2>
+      <p>Un projet ? Écrivez-moi, je réponds rapidement.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="c-info-list reveal">
+        <div class="c-row"><div class="c-dot">📧</div><div><div class="c-row-lbl">Email</div><div class="c-row-val">mazagrouze@gmail.com</div></div></div>
+        <div class="c-row"><div class="c-dot">📞</div><div><div class="c-row-lbl">Téléphone</div><div class="c-row-val">+212 6 69 78 01 46</div></div></div>
+        <div class="c-row"><div class="c-dot">📍</div><div><div class="c-row-lbl">Localisation</div><div class="c-row-val">Marrakech, Maroc</div></div></div>
+        <div class="c-row"><div class="c-dot">🎓</div><div><div class="c-row-lbl">Disponibilité</div><div class="c-row-val">Stage / Alternance / Freelance</div></div></div>
+      </div>
+      <div class="reveal">
+        <div class="c-form">
+          <div class="c-form-row">
+            <input type="text" id="f-name" placeholder="Votre nom"/>
+            <input type="email" id="f-email" placeholder="Votre email"/>
+          </div>
+          <input type="text" id="f-subject" placeholder="Sujet"/>
+          <textarea id="f-msg" placeholder="Votre message..."></textarea>
+          <button class="btn-send" id="sendBtn">Envoyer le message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><p>© 2026 <span>Mohamed Azagrouze</span> · Marrakech, Maroc 🇲🇦</p></footer>
+<div class="toast" id="toast">✓ Ouverture de votre messagerie…</div>
+
+<script>
+(function(){
+  // Hamburger
+  var ham = document.getElementById('ham');
+  var nav = document.getElementById('navLinks');
+  ham.addEventListener('click', function(){ nav.classList.toggle('open'); });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ nav.classList.remove('open'); });
+  });
+
+  // Active nav
+  var secs = document.querySelectorAll('section');
+  var links = nav.querySelectorAll('a');
+  function setActive(){
+    var y = window.scrollY + 160;
+    var cur = '';
+    secs.forEach(function(s){ if(y >= s.offsetTop) cur = s.id; });
+    links.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#'+cur); });
+  }
+  window.addEventListener('scroll', setActive);
+  setActive();
+
+  // Reveal
+  var revs = document.querySelectorAll('.reveal');
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e, i){
+      if(e.isIntersecting){
+        setTimeout(function(){ e.target.classList.add('visible'); }, 60);
+      }
+    });
+  }, {threshold: 0.1});
+  revs.forEach(function(el){ obs.observe(el); });
+
+  // Stagger cards
+  document.querySelectorAll('.srv-card').forEach(function(c,i){ c.style.transitionDelay = (i*0.07)+'s'; });
+
+  // Skill bars
+  var bars = document.querySelectorAll('.sk-bar');
+  var bObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.style.width = e.target.getAttribute('data-w') + '%';
+        bObs.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.3});
+  bars.forEach(function(b){ bObs.observe(b); });
+
+  // Send
+  document.getElementById('sendBtn').addEventListener('click', function(){
+    var n = document.getElementById('f-name').value.trim();
+    var e = document.getElementById('f-email').value.trim();
+    var s = document.getElementById('f-subject').value.trim();
+    var m = document.getElementById('f-msg').value.trim();
+    if(!n||!e||!s||!m){ alert('Veuillez remplir tous les champs.'); return; }
+    window.location.href = 'mailto:mazagrouze@gmail.com?subject='+encodeURIComponent(s)+'&body='+encodeURIComponent('Nom : '+n+'\nEmail : '+e+'\n\nMessage :\n'+m);
+    var t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 3000);
+    ['f-name','f-email','f-subject','f-msg'].forEach(function(id){ document.getElementById(id).value=''; });
+  });
+})();
+</script>
+</body>
+</html>
